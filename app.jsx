@@ -1,23 +1,24 @@
 var SubscribeUnit = React.createClass({
     getInitialState: function() {
         return {
-			isSubmitted: false,
-			showResults: false
-		};
+    			isSubmitted: false,
+    			showResults: false
+    		};
     },
-    _handleClick: function() {
-        this.setState({ showResults: true });
+    _handleClick: function(showResults) {
+        this.setState({ showResults: showResults });
     },
-	handleSubmit: function (isSubmitted) {
-		this.setState({ isSubmitted: isSubmitted });
-	},
+	  _handleSubmit: function (isSubmitted) {
+		    this.setState({ isSubmitted: isSubmitted });
+	  },
     render: function() {
         return (
             <div className="subscribe-pg-one">
-				<h3>Subscribe to our newsletters</h3>
-                { !this.state.isSubmitted && <input onClick={ this._handleClick } onKeyUp={ this._handleClick }/>}
-                { this.state.showResults ? <Options /> : null }
-				<SubmitButton onSubmit={this.handleSubmit}/>
+				        { !this.state.isSubmitted && <h3>Subscribe to our newsletters</h3> }
+
+                { !this.state.isSubmitted && <input onClick={ this._handleClick } onKeyUp={ this._handleClick }/> }
+                { !this.state.isSubmitted && this.state.showResults ? <Options /> : null }
+				        <SubmitButton onSubmit={this._handleSubmit}/>
             </div>
         );
     }
@@ -28,15 +29,17 @@ var Options = React.createClass({
         return (
             <div className="options">
                 <ul className="collapse">
-			        <li>
-				        <input type="checkbox" />
-				        <div><h3>GQ SHARP + SMART (Daily)</h3></div>
-			        </li>
-			        <li>
-				        <input type="checkbox" />
-				        <div><h3>YOUR WEEKLY GQ</h3></div>
-			        </li>
-			    </ul>
+			             <li>
+				               <input type="checkbox" />
+				               <div><h3>GQ SHARP + SMART (Daily)</h3></div>
+			             </li>
+			             <li>
+				               <input type="checkbox" />
+				               <div><h3>YOUR WEEKLY GQ</h3></div>
+			            </li>
+			         </ul>
+               <p>I understand and agree that registration on or use of this site constitutes agreement to it&#x00027;s user agreement & privacy policy.</p>
+
             </div>
         );
     }
@@ -55,7 +58,8 @@ var SubmitButton = React.createClass({
     render: function() {
         return (
 			<div>
-			<button onClick={this._handleClick}>submit</button>
+      { !this.state.submitted && <button onClick={this._handleClick}>submit</button> }
+
 			{ this.state.submitted ? <Thanks /> : null }
 			</div>
         )
