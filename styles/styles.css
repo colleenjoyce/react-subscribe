@@ -12,3 +12,7 @@ h3 {
     background-color: slategray;
     padding: 10px;
 }
+
+.hidden-inputs {
+  display: none;
+}

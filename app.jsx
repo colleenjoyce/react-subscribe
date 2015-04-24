@@ -1,3 +1,19 @@
+var HiddenInputs = React.createClass({
+  render: function() {
+    return (
+      <div className="hidden-inputs">
+        <input type="hidden" name="toolkit.application" value="newsletter" />
+        <input type="hidden" name="toolkit.applicationId" value="" />
+        <input type="hidden" name="formName" value="shortForm" />
+        <input type="hidden" name="partnerCode" value="" />
+        <input type="hidden" name="sourceCode" value="" />
+      </div>
+
+
+    );
+  }
+});
+
 var SubscribeUnit = React.createClass({
     getInitialState: function() {
         return {
@@ -14,11 +30,18 @@ var SubscribeUnit = React.createClass({
     render: function() {
         return (
             <div className="subscribe-pg-one">
-				        { !this.state.isSubmitted && <h3>Subscribe to our newsletters</h3> }
+              <form name="newslettersForm" action="https://secure.gq.com/services/newsletters" method="post">
+                { !this.state.isSubmitted && <h5>Subscribe to our newsletters</h5> }
+                <fieldset>
+                  { !this.state.isSubmitted && <HiddenInputs /> }
+                </fieldset>
+
 
                 { !this.state.isSubmitted && <input onClick={ this._handleClick } onKeyUp={ this._handleClick }/> }
                 { !this.state.isSubmitted && this.state.showResults ? <Options /> : null }
-				        <SubmitButton onSubmit={this._handleSubmit}/>
+                <SubmitButton onSubmit={this._handleSubmit}/>
+
+              </form>
             </div>
         );
     }
@@ -69,7 +92,7 @@ var SubmitButton = React.createClass({
 var Thanks = React.createClass({
     render: function() {
         return (
-            <div>
+            <div className="subscribe-page-two">
               Thanks!
             </div>
         )
@@ -77,4 +100,4 @@ var Thanks = React.createClass({
 });
 
 
-React.render(<SubscribeUnit />, document.getElementById('sub-unit'));
+React.render(<SubscribeUnit />, document.getElementById('newsletter-form'));
